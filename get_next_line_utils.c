@@ -1,0 +1,87 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amarchan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/13 14:51:46 by amarchan          #+#    #+#             */
+/*   Updated: 2021/12/13 20:58:46 by amarchan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
+int	ft_strlen(char *str)
+{
+		int	i;
+
+		i = 0;
+		while (str[i])
+				i++;
+		return (i);
+}
+
+char	*ft_strdup(const char *src)
+{
+	int		i;
+	int		len;
+	char	*copy;
+
+	len = 0;
+	if (!src)
+		return (NULL);
+	while (src[len])
+		len++;
+	copy = malloc(sizeof(*copy) * (len + 1));
+	if (!copy)
+		return (0);
+	i = 0;
+	while (i < len)
+	{
+		copy[i] = src[i];
+		i++;
+	}
+	copy[i] = '\0';
+	return (copy);
+}
+
+char	*ft_realloc_and_concat(char *str, size_t oldsize,
+			size_t newsize, char *newstr)
+{
+	size_t	destsize;
+	char	*dest;
+	int		i;
+	int		j;
+
+	destsize = newsize + oldsize;
+	dest = malloc(sizeof(char) * destsize + 1);
+	i = 0;
+	if (!dest)
+		return (0);
+	while (i < oldsize)
+	{
+		dest[i] = str[i];
+		i++;
+	}
+	j = 0;
+	while (j < newsize)
+	{
+		dest[i] = newstr[j];
+		i++;
+		j++;
+	}
+	free(str);
+	dest[i + j] = '\0';
+	return (dest);
+}
+
+/*int main()
+{
+		char *str = "alicia";
+		char *newstr = "PA";
+		size_t newsize = 2;
+		size_t oldsize = 6;
+
+		printf("%s\n", realloc_and_concat(str, oldsize, newsize, newstr));
+		return (0);
+}*/
