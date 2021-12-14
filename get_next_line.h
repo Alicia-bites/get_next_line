@@ -6,7 +6,7 @@
 /*   By: amarchan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 16:25:52 by amarchan          #+#    #+#             */
-/*   Updated: 2021/12/13 20:52:26 by amarchan         ###   ########.fr       */
+/*   Updated: 2021/12/14 14:23:48 by amarchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@
 
 char	*get_next_line(int fd);
 int		ft_strlen(char *str);
-char	*ft_realloc_and_concat(char *str, size_t oldsize,
-			size_t newsize, char *newstr);
+char	*ft_strdup(char *src);
+char 	*ft_strchr(char *s, char c);
+char	*ft_realloc_and_concat(char *str, size_t oldsize, size_t newsize,
+			char *newstr);
+char	*ft_free(char *str);
 
 #endif

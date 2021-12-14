@@ -6,7 +6,7 @@
 /*   By: amarchan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:51:46 by amarchan          #+#    #+#             */
-/*   Updated: 2021/12/13 21:25:42 by amarchan         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:57:45 by amarchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_strlen(char *str)
 		return (i);
 }
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup(char *src)
 {
 	int		i;
 	int		len;
@@ -45,14 +45,32 @@ char	*ft_strdup(const char *src)
 	return (copy);
 }
 
+char	*ft_strchr(char *s, char c)
+{
+	int		i;
+
+	i = 0;
+	if (s == NULL)
+		return (NULL);
+	while (s[i] != c)
+	{
+		if (s[i] == '\0')
+			return (NULL);
+		i++;
+	}
+	return (&s[i]);
+}
+
 char	*ft_realloc_and_concat(char *str, size_t oldsize,
 			size_t newsize, char *newstr)
 {
 	size_t	destsize;
 	char	*dest;
-	int		i;
-	int		j;
-
+	size_t	i;
+	size_t	j;
+	
+	if (!str || ! newstr)
+			return (0);
 	destsize = newsize + oldsize;
 	dest = malloc(sizeof(char) * destsize + 1);
 	i = 0;
@@ -70,12 +88,12 @@ char	*ft_realloc_and_concat(char *str, size_t oldsize,
 		i++;
 		j++;
 	}
-	free(str);
+	//free(str);
 	dest[i + j] = '\0';
 	return (dest);
 }
 
-char	*ft_free(char*str)
+char	*ft_free(char *str)
 {
 		free(str);
 		return (NULL);
