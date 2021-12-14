@@ -6,7 +6,7 @@
 /*   By: amarchan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:51:46 by amarchan          #+#    #+#             */
-/*   Updated: 2021/12/14 15:57:45 by amarchan         ###   ########.fr       */
+/*   Updated: 2021/12/14 16:05:56 by amarchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*ft_realloc_and_concat(char *str, size_t oldsize,
 		i++;
 		j++;
 	}
-	//free(str);
+	free(str);
 	dest[i + j] = '\0';
 	return (dest);
 }
