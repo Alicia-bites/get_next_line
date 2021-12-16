@@ -1,3 +1,5 @@
-Ceci est une first string
-Ceci est une second string
-Ceci est une third string
+Live,
+Travel,
+
+Bless,
+And don't be sorry.

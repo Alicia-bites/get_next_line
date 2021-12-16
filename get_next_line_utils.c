@@ -6,19 +6,20 @@
 /*   By: amarchan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:51:46 by amarchan          #+#    #+#             */
-/*   Updated: 2021/12/14 16:05:56 by amarchan         ###   ########.fr       */
+/*   Updated: 2021/12/16 14:17:18 by amarchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
 int	ft_strlen(char *str)
 {
-		int	i;
+	int	i;
 
-		i = 0;
-		while (str[i])
-				i++;
-		return (i);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
 char	*ft_strdup(char *src)
@@ -68,14 +69,17 @@ char	*ft_realloc_and_concat(char *str, size_t oldsize,
 	char	*dest;
 	size_t	i;
 	size_t	j;
-	
-	if (!str || ! newstr)
-			return (0);
+
+	if (!str || !newstr)
+		return (NULL);
 	destsize = newsize + oldsize;
 	dest = malloc(sizeof(char) * destsize + 1);
 	i = 0;
 	if (!dest)
-		return (0);
+	{
+		ft_free(str);
+		return (ft_free(newstr));
+	}
 	while (i < oldsize)
 	{
 		dest[i] = str[i];
@@ -84,19 +88,19 @@ char	*ft_realloc_and_concat(char *str, size_t oldsize,
 	j = 0;
 	while (j < newsize)
 	{
-		dest[i] = newstr[j];
-		i++;
-		j++;
+		dest[i++] = newstr[j++];
 	}
-	free(str);
+	ft_free(str);
+	ft_free(newstr);
 	dest[i + j] = '\0';
 	return (dest);
 }
 
 char	*ft_free(char *str)
 {
+	if (str)
 		free(str);
-		return (NULL);
+	return (NULL);
 }
 
 /*int main()
@@ -106,6 +110,6 @@ char	*ft_free(char *str)
 		size_t newsize = 2;
 		size_t oldsize = 6;
 
-		printf("%s\n", realloc_and_concat(str, oldsize, newsize, newstr));
+		printf("%s\n", ft_realloc_and_concat(str, oldsize, newsize, newstr));
 		return (0);
 }*/
