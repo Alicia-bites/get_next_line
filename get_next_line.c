@@ -18,7 +18,7 @@ char	*get_next_line(int fd)
 		char			*remember;
 		char			*temp;
 		int				has_read;
-		static	int		read_counter;
+		static	int		read_counter = 0;
 		int				i;
 
 		if (fd < 0 || BUFFER_SIZE <= 0)
@@ -30,20 +30,25 @@ char	*get_next_line(int fd)
 				i++;
 		}
 		has_read = 1;
-		read_counter = 0;
-		while (has_read <= BUFFER_SIZE && strchr(buf, '\n') == NULL) 
+		while (has_read <= BUFFER_SIZE || strchr(buf, '\n') == NULL)
 		{
 				has_read = read(fd, buf, BUFFER_SIZE);
 				read_counter++;
+				printf("read_counter :%d\n", read_counter);
 				if (has_read == -1)
 						return (ft_free(buf));
 				buf[has_read] = '\0';
 				if (read_counter == 1)
+				{
 						remember = ft_strdup(buf);
+						return (remember);
+				}
 				else
 				{
 						temp = ft_strdup(buf);
+						//printf("remember :%d, temp :%d\n", ft_strlen(remember), ft_strlen(temp));
 						remember = ft_realloc_and_concat(remember, ft_strlen(remember), ft_strlen(temp), temp);
+						printf("%s\n", remember);
 						if (has_read == 0)
 						{
 								ft_free(remember);
