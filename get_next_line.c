@@ -14,47 +14,48 @@
 
 char	*get_next_line(int fd)
 {
-		char			buf[BUFFER_SIZE + 1];
-		char			*remember;
-		char			*temp;
-		int				has_read;
-		static	int		read_counter = 0;
-		int				i;
+	char			buf[BUFFER_SIZE + 1];
+	char			*line;
+	char			*temp;
+	int				has_read;
+	static	int		read_counter = 0;
+	int				i;
 
-		if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	i = 0;
+	while (i < BUFFER_SIZE)
+	{
+		buf[i] = 0;
+		i++;
+	}
+	has_read = 1;
+	while (has_read <= BUFFER_SIZE || ft_strchr(buf, '\n') <= 0)
+	{
+		has_read = read(fd, buf, BUFFER_SIZE);
+		read_counter++;
+		printf("read_counter :%d\n", read_counter);
+		if (has_read == -1)
+			return (ft_free(buf));
+		buf[has_read] = '\0';
+		if (read_counter == 1)
+		{
+			line = ft_strdup(buf);
+			return (line);
+		}
+		else
+		{
+			temp = ft_strdup(buf);
+			printf("temp = %s\n", temp);
+			printf("line = %s\n", line);
+			line = ft_realloc_and_concat(line, ft_strlen(line), ft_strlen(temp), temp);
+			printf("line after realloc and concat = %s\n\n", line);
+			if (has_read == 0)
+			{
+				ft_free(line);
 				return (NULL);
-		i = 0;
-		while (i < BUFFER_SIZE)
-		{
-				buf[i] = 0;
-				i++;
+			}
 		}
-		has_read = 1;
-		while (has_read <= BUFFER_SIZE || strchr(buf, '\n') == NULL)
-		{
-				has_read = read(fd, buf, BUFFER_SIZE);
-				read_counter++;
-				printf("read_counter :%d\n", read_counter);
-				if (has_read == -1)
-						return (ft_free(buf));
-				buf[has_read] = '\0';
-				if (read_counter == 1)
-				{
-						remember = ft_strdup(buf);
-						return (remember);
-				}
-				else
-				{
-						temp = ft_strdup(buf);
-						//printf("remember :%d, temp :%d\n", ft_strlen(remember), ft_strlen(temp));
-						remember = ft_realloc_and_concat(remember, ft_strlen(remember), ft_strlen(temp), temp);
-						printf("%s\n", remember);
-						if (has_read == 0)
-						{
-								ft_free(remember);
-								return (NULL);
-						}
-				}
-		}
-		return (remember);
+	}
+	return (line);
 }

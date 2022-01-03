@@ -27,7 +27,7 @@
 char	*get_next_line(int fd);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *src);
-char	*ft_strchr(char *s, char c);
+int		ft_strchr(char *s, char c);
 char	*ft_realloc_and_concat(char *str, size_t oldsize, size_t newsize,
 			char *newstr);
 char	*ft_free(char *str);
