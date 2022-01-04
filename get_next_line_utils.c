@@ -31,13 +31,13 @@ char	*ft_strdup(char *src)
 	len = 0;
 	if (!src)
 		return (NULL);
-	while (src[len])
+	while (len < BUFFER_SIZE && str[len - 1] != '\n')
 		len++;
 	copy = malloc(sizeof(*copy) * (len + 1));
 	if (!copy)
 		return (0);
 	i = 0;
-	while (i < len)
+	while (i < len && src[i - 1] != '\n')
 	{
 		copy[i] = src[i];
 		i++;

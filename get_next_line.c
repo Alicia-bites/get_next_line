@@ -14,29 +14,27 @@
 
 char	*get_next_line(int fd)
 {
-	char			buf[BUFFER_SIZE + 1];
-	char			*line;
-	char			*temp;
-	int				has_read;
-	static	int		read_counter = 0;
-	int				i;
+	static char	buf[BUFFER_SIZE + 1];
+	char		*line;
+	char		*temp;
+	int			has_read;
+	static	int	read_counter = 0;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	i = 0;
-	while (i < BUFFER_SIZE)
+
+	if (buf[j] != '\0')
 	{
-		buf[i] = 0;
-		i++;
+		line = strdup(line)
 	}
-	has_read = 1;
+	has_read = 0;
 	while (has_read <= BUFFER_SIZE || ft_strchr(buf, '\n') <= 0)
 	{
 		has_read = read(fd, buf, BUFFER_SIZE);
 		read_counter++;
-		printf("read_counter :%d\n", read_counter);
+		//printf("read_counter :%d\n", read_counter);
 		if (has_read == -1)
-			return (ft_free(buf));
+			return (NULL);
 		buf[has_read] = '\0';
 		if (read_counter == 1)
 		{
@@ -46,8 +44,8 @@ char	*get_next_line(int fd)
 		else
 		{
 			temp = ft_strdup(buf);
-			printf("temp = %s\n", temp);
-			printf("line = %s\n", line);
+			//printf("temp = %s\n", temp);
+			//printf("line = %s\n", line);
 			line = ft_realloc_and_concat(line, ft_strlen(line), ft_strlen(temp), temp);
 			printf("line after realloc and concat = %s\n\n", line);
 			if (has_read == 0)

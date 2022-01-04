@@ -13,7 +13,7 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <bsd/string.h>
+//# include <bsd/string.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <sys/types.h>
