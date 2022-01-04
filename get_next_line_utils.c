@@ -22,7 +22,7 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strdup(char *src)
+char	*ft_strdup(char *src, int *remember)
 {
 	int		i;
 	int		len;
@@ -31,11 +31,11 @@ char	*ft_strdup(char *src)
 	len = 0;
 	if (!src)
 		return (NULL);
-	while (len < BUFFER_SIZE && str[len - 1] != '\n')
+	while (len < BUFFER_SIZE && src[len - 1] != '\n')
 		len++;
 	copy = malloc(sizeof(*copy) * (len + 1));
 	if (!copy)
-		return (0);
+		return (NULL);
 	i = 0;
 	while (i < len && src[i - 1] != '\n')
 	{
@@ -43,6 +43,8 @@ char	*ft_strdup(char *src)
 		i++;
 	}
 	copy[i] = '\0';
+	if (remember != 0)
+		*remember = len;
 	return (copy);
 }
 
