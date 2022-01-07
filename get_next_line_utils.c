@@ -43,7 +43,7 @@ char	*ft_strdup(char *src, int *remember)
 		i++;
 	}
 	copy[i] = '\0';
-	if (remember != 0)
+	if (remember != NULL)
 		*remember = len;
 	return (copy);
 }

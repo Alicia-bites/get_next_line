@@ -24,6 +24,7 @@
 # define BUFFER_SIZE 1024
 #endif
 char	*get_next_line(int fd);
+int		ft_check_remember(int remember);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *src, int *remember);
 int		ft_strchr(char *s, char c);
