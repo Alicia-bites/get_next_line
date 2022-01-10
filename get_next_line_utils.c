@@ -33,7 +33,7 @@ char	*ft_strdup(char *src, int *remember)
 		return (NULL);
 	while (len < BUFFER_SIZE && src[len - 1] != '\n')
 		len++;
-	copy = malloc(sizeof(*copy) * (len + 1));
+	copy = malloc(sizeof(char) * (len + 1));
 	if (!copy)
 		return (NULL);
 	i = 0;
@@ -54,7 +54,7 @@ int	ft_strchr(char *s, char c)
 
 	i = 0;
 	if (s == NULL)
-		return (0);
+		return (-1);
 	while (s[i] != c)
 	{
 		if (s[i] == '\0')
@@ -90,7 +90,9 @@ char	*ft_realloc_and_concat(char *str, size_t oldsize,
 	j = 0;
 	while (j < newsize)
 		dest[i++] = newstr[j++];
-	dest[i + j] = '\0';
+	dest[destsize] = '\0';
+	free(newstr);
+	free(str);
 	return (dest);
 }
 

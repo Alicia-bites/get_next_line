@@ -59,41 +59,33 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	line = NULL;
 	if (remember > 0)
 	{
-		//printf("remember : %d\n", remember);
 		line = ft_get_leftovers(buf, &remember);
-		//printf("line : %s\n", line);
-		if (ft_strchr(line, '\n') > 0)
+		if (ft_strchr(line, '\n') >= 0)
 			return (line);
 	}
-	if (read_counter == 0)
-		line = NULL;
 	has_read = BUFFER_SIZE;
-	while (has_read == BUFFER_SIZE && ft_strchr(line, '\n') <= 0)
+	while (has_read == BUFFER_SIZE && ft_strchr(line, '\n') < 0)
 	{
 		has_read = read(fd, buf, BUFFER_SIZE);
 		read_counter++;
-		//printf("read_counter :%d\n", read_counter);
 		if (has_read == -1 || has_read == 0)
-			return (NULL);
+		{
+			remember = BUFFER_SIZE;
+			return (line);
+		}
 		buf[has_read] = '\0';
 		if (read_counter == 1)
 		{
 			line = ft_strdup(buf, &remember);
-			//printf("remember = %d\n", remember);
-			return (line);
 		}
 		else
 		{
 			temp = ft_strdup(buf, &remember);
-			//printf("temp = %s\n", temp);
-			//printf("line = %s\n", line);
 			line = ft_realloc_and_concat(line, ft_strlen(line), ft_strlen(temp), temp);
-			//printf("line after realloc and concat = %s\n", line);
 		}
 	}
-	if (has_read < BUFFER_SIZE)
-		remember = -1;
 	return (line);
 }
