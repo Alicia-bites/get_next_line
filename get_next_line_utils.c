@@ -15,7 +15,9 @@
 int	ft_strlen(char *str)
 {
 	int	i;
-
+	
+	if (str == NULL)
+		return (0);
 	i = 0;
 	while (str[i])
 		i++;
@@ -41,7 +43,7 @@ char	*ft_strdup(char *src, int *remember)
 	{
 		copy[i] = src[i];
 		i++;
-	}
+	}  
 	copy[i] = '\0';
 	if (remember != NULL)
 		*remember = len;

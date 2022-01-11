@@ -74,6 +74,8 @@ char	*get_next_line(int fd)
 		if (has_read == -1 || has_read == 0)
 		{
 			remember = BUFFER_SIZE;
+			if (ft_strlen(line) == 0)
+				return (ft_free(line));
 			return (line);
 		}
 		buf[has_read] = '\0';
