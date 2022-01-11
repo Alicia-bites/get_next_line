@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarchan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amarchan <amarchan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:52:03 by amarchan          #+#    #+#             */
-/*   Updated: 2021/12/16 14:18:32 by amarchan         ###   ########.fr       */
+/*   Updated: 2022/01/11 18:09:38 by amarchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ char	*ft_get_leftovers(char *buf, int *remember)
 	i = 0;
 	while (i < (len + 1) && buf[*remember] != '\n')
 	{
-		line[i] = buf[*remember];
-		i++;
-		(*remember)++;
+		line[i++] = buf[(*remember)++];
 	}
 	if (buf[*remember] == '\n')
 		line[i++] = '\n';
@@ -48,14 +46,36 @@ char	*ft_get_leftovers(char *buf, int *remember)
 	return (line);
 }
 
+char	*ft_get_line(char *line, char *buf, int *remember, int read_counter)
+{
+	char	*temp;
+	
+	if (read_counter == 1)
+		line = ft_strdup(buf, remember);
+	else
+	{
+		temp = ft_strdup(buf, remember);
+		line = ft_realloc_and_concat(line, ft_strlen(line),
+				ft_strlen(temp), temp);
+	}
+	return (line);
+}
+
+char	*ft_check_line(int *remember, char *line)
+{
+ 	*remember = BUFFER_SIZE;
+	if (ft_strlen(line) == 0)
+		return (ft_free(line));
+	return (line);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	buf[BUFFER_SIZE + 1];
+	static int	read_counter;
+	static int	remember;
 	char		*line;
-	char		*temp;
 	int			has_read;
-	static int	read_counter = 0;
-	static int	remember = 0;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -70,24 +90,10 @@ char	*get_next_line(int fd)
 	while (has_read == BUFFER_SIZE && ft_strchr(line, '\n') < 0)
 	{
 		has_read = read(fd, buf, BUFFER_SIZE);
-		read_counter++;
 		if (has_read == -1 || has_read == 0)
-		{
-			remember = BUFFER_SIZE;
-			if (ft_strlen(line) == 0)
-				return (ft_free(line));
-			return (line);
-		}
+			return (ft_check_line(&remember, line));
 		buf[has_read] = '\0';
-		if (read_counter == 1)
-		{
-			line = ft_strdup(buf, &remember);
-		}
-		else
-		{
-			temp = ft_strdup(buf, &remember);
-			line = ft_realloc_and_concat(line, ft_strlen(line), ft_strlen(temp), temp);
-		}
+		line = ft_get_line(line, buf, &remember, ++read_counter);
 	}
 	return (line);
 }

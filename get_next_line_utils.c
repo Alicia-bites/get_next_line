@@ -15,7 +15,7 @@
 int	ft_strlen(char *str)
 {
 	int	i;
-	
+
 	if (str == NULL)
 		return (0);
 	i = 0;
@@ -43,7 +43,7 @@ char	*ft_strdup(char *src, int *remember)
 	{
 		copy[i] = src[i];
 		i++;
-	}  
+	}
 	copy[i] = '\0';
 	if (remember != NULL)
 		*remember = len;
@@ -78,17 +78,14 @@ char	*ft_realloc_and_concat(char *str, size_t oldsize,
 		return (NULL);
 	destsize = newsize + oldsize;
 	dest = malloc(sizeof(char) * destsize + 1);
-	i = 0;
 	if (!dest)
 	{
 		ft_free(str);
 		return (ft_free(newstr));
 	}
-	while (i < oldsize)
-	{
+	i = -1;
+	while (++i < oldsize)
 		dest[i] = str[i];
-		i++;
-	}
 	j = 0;
 	while (j < newsize)
 		dest[i++] = newstr[j++];

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amarchan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amarchan <amarchan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 16:25:52 by amarchan          #+#    #+#             */
-/*   Updated: 2021/12/16 15:04:56 by amarchan         ###   ########.fr       */
+/*   Created: 2022/01/11 16:09:53 by amarchan          #+#    #+#             */
+/*   Updated: 2022/01/11 17:15:28 by amarchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
 # define BUFFER_SIZE 1024
 #endif
 char	*get_next_line(int fd);
+char	*ft_get_leftovers(char *buf, int *remember);
 int		ft_check_remember(int remember);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *src, int *remember);
 int		ft_strchr(char *s, char c);
 char	*ft_realloc_and_concat(char *str, size_t oldsize, size_t newsize,
 			char *newstr);
-char	*ft_get_leftovers(char *buf, int *remember);
 char	*ft_free(char *str);
 
 #endif
