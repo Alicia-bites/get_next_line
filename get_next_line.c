@@ -6,7 +6,7 @@
 /*   By: amarchan <amarchan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:52:03 by amarchan          #+#    #+#             */
-/*   Updated: 2022/01/11 18:09:38 by amarchan         ###   ########.fr       */
+/*   Updated: 2022/01/12 14:07:06 by amarchan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_get_leftovers(char *buf, int *remember)
 char	*ft_get_line(char *line, char *buf, int *remember, int read_counter)
 {
 	char	*temp;
-	
+
 	if (read_counter == 1)
 		line = ft_strdup(buf, remember);
 	else
@@ -63,7 +63,7 @@ char	*ft_get_line(char *line, char *buf, int *remember, int read_counter)
 
 char	*ft_check_line(int *remember, char *line)
 {
- 	*remember = BUFFER_SIZE;
+	*remember = BUFFER_SIZE;
 	if (ft_strlen(line) == 0)
 		return (ft_free(line));
 	return (line);

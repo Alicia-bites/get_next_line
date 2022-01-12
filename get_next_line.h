@@ -20,11 +20,14 @@
 # include <fcntl.h>
 # include <stddef.h>
 # include <stdlib.h>
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1024
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 2048
+# endif
+
 char	*get_next_line(int fd);
 char	*ft_get_leftovers(char *buf, int *remember);
+char	*ft_get_line(char *line, char *buf, int *remember, int read_counter);
+char	*ft_check_line(int *remember, char *line);
 int		ft_check_remember(int remember);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *src, int *remember);
