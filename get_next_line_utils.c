@@ -74,7 +74,7 @@ char	*ft_realloc_and_concat(char *str, size_t oldsize,
 	size_t	i;
 	size_t	j;
 
-	if (!str || !newstr)
+	if (!newstr)
 		return (NULL);
 	destsize = newsize + oldsize;
 	dest = malloc(sizeof(char) * destsize + 1);
